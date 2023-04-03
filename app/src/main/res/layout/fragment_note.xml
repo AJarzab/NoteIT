@@ -65,6 +65,75 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rvNote"
+        android:paddingStart="6dp"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingBottom="5dp"
+        android:transitionGroup="true">
+
+    </androidx.recyclerview.widget.RecyclerView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:id="@+id/noData"
+            android:src="@drawable/ic_no_data"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone">
+        </ImageView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:id="@+id/add_note_fab"
+        android:focusable="true"
+        android:clickable="true"
+        android:animateLayoutChanges="true"
+        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:background="@drawable/fab_btn_corner"
+        android:backgroundTint="@color/black"
+        android:layout_margin="16dp">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/inner_fab"
+            android:src="@drawable/ic_round_add_24"
+            android:backgroundTint="@color/black"
+            app:elevation="0dp"
+            app:tint="@color/white"
+            app:fabSize="normal"
+            app:borderWidth="0dp"
+            app:useCompatPadding="false">
+
+
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chatFabText"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="@string/add_note"
+            android:textColor="@color/white"
+            android:paddingStart="0dp"
+            android:paddingEnd="20dp"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button">
+        </TextView>
+
+    </LinearLayout>
 
 
 
