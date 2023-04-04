@@ -6,15 +6,15 @@
     <string name="no_data">no_data</string>
     <string name="add_note">Add Note</string>
     <string name="choose_color">Choose Color</string>
-    <string name="some_text">Lorem Ipsum is simply dummy text of
-        the printing and typesetting industry. Lorem Ipsum has been
-        the industry\'s standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled
-        it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged.
+    <string name="some_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique elit a neque hendrerit, a cursus libero hendrerit. In molestie id nunc nec faucibus. In et facilisis enim. Proin aliquet arcu eget tellus feugiat, eu convallis mi malesuada. Curabitur quis turpis quam. Morbi et malesuada lorem, at vestibulum orci. Aenean.
     </string>
     <string name="edited_on">Edited on: %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back_button">Back button</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="title">Title</string>
+    <string name="note">Note</string>
+    <string name="color_palette_button">Color palette button</string>
+    <string name="note_title">Note Title</string>
+    <string name="bar">bar</string>
+    <string name="this_is_a_title">Note Title</string>
 </resources>
