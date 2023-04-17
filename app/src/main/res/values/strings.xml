@@ -10,11 +10,12 @@
     </string>
     <string name="edited_on">Edited on: %1$s</string>
     <string name="back_button">Back button</string>
-    <string name="edit_note">Edit Note</string>
+    <string name="edit_note">Last edit: </string>
     <string name="title">Title</string>
     <string name="note">Note</string>
     <string name="color_palette_button">Color palette button</string>
     <string name="note_title">Note Title</string>
     <string name="bar">bar</string>
     <string name="this_is_a_title">Note Title</string>
+    <string name="add_note_button">Add note button</string>
 </resources>
