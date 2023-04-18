@@ -3,7 +3,7 @@ package com.example.noteit.utils
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class SwipeToDelete() : ItemTouchHelper.SimpleCallback(
+abstract class SwipeToDelete : ItemTouchHelper.SimpleCallback(
     ItemTouchHelper.UP or ItemTouchHelper.DOWN,
     ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
 
@@ -12,6 +12,6 @@ abstract class SwipeToDelete() : ItemTouchHelper.SimpleCallback(
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        return true;
+        return true
     }
 }

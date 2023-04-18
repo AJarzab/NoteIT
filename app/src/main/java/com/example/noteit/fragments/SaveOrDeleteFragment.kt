@@ -3,13 +3,11 @@ package com.example.noteit.fragments
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.AbsSavedState
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.NavController
@@ -18,7 +16,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.noteit.R
 import com.example.noteit.activity.MainActivity
 import com.example.noteit.databinding.BottomSheetLayoutBinding
-import com.example.noteit.databinding.FragmentNoteBinding
 import com.example.noteit.databinding.FragmentSaveOrDeleteBinding
 import com.example.noteit.model.Note
 import com.example.noteit.utils.hideKeyboard
@@ -28,6 +25,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -66,7 +65,10 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
             navController.popBackStack()
         }
 
-        contentBinding.lastEdited.text= getString(R.string.edited_on, SimpleDateFormat.getDateInstance().format(Date()))
+        ViewCompat.setTransitionName(
+            contentBinding.noteContentFragmentParent,
+            "recyclerView_${args.note?.id}"
+        )
 
         contentBinding.saveNote.setOnClickListener{
             saveNote()
@@ -119,6 +121,35 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
                 bottomSheetDialog.behavior.state=BottomSheetBehavior.STATE_EXPANDED
             }
         }
+
+        //open with existing note
+        setUpNote()
+    }
+
+    private fun setUpNote() {
+        val note=args.note
+        val title=contentBinding.etTitle
+        val content=contentBinding.etNoteContent
+        val lastEdited=contentBinding.lastEdited
+
+        if (note==null){
+            contentBinding.lastEdited.text= getString(R.string.edited_on, SimpleDateFormat.getDateInstance().format(Date()))
+        }
+        if (note!= null){
+            title.setText(note.title)
+            content.renderMD(note.content)
+            lastEdited.text=getString(R.string.edited_on,note.date)
+            color=note.color
+            contentBinding.apply {
+                job.launch {
+                    delay(10)
+                    noteContentFragmentParent.setBackgroundColor(color)
+                }
+                toolbarFragmentNoteContent.setBackgroundColor(color)
+                bottomBar.setBackgroundColor(color)
+            }
+            activity?.window?.statusBarColor=note.color
+        }
     }
 
     private fun saveNote() {
@@ -150,8 +181,25 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
                 else ->
                 {
                     //update note
+                    updateNote()
+                    navController.popBackStack()
                 }
         }
     }}
+
+    private fun updateNote() {
+        if (note!=null)
+        {
+            noteActivityViewModel.updateNote(
+                Note(
+                    note!!.id,
+                    contentBinding.etTitle.text.toString(),
+                    contentBinding.etNoteContent.getMD(),
+                    currentDate,
+                    color
+                )
+            )
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.noteit.fragments
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
@@ -33,7 +34,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
-class NoteFragment(swipeDirs: Int) : Fragment(R.layout.fragment_note) {
+@Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+class NoteFragment : Fragment(R.layout.fragment_note) {
 
     private lateinit var noteBinding: FragmentNoteBinding
     private val noteActivityViewModel:NoteActivityViewModel by activityViewModels()
@@ -76,7 +78,6 @@ class NoteFragment(swipeDirs: Int) : Fragment(R.layout.fragment_note) {
 //        Search
         noteBinding.search.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                noteBinding.noData.isVisible= false
             }
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -125,7 +126,7 @@ class NoteFragment(swipeDirs: Int) : Fragment(R.layout.fragment_note) {
     }
 
     private fun swipeToDelete(rvNote: RecyclerView) {
-        val swipeToDeleteCallback=object : SwipeToDelete()
+        val swipeToDeleteCallback = object : SwipeToDelete()
         {
             override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
                 val position=viewHolder.absoluteAdapterPosition
@@ -150,7 +151,6 @@ class NoteFragment(swipeDirs: Int) : Fragment(R.layout.fragment_note) {
                         transientBottomBar?.setAction("UNDO"){
                             noteActivityViewModel.saveNote(note)
                             actionBtnTapped=true
-                            noteBinding.noData.isVisible=false
                         }
                         super.onShown(transientBottomBar)
                     }
@@ -169,15 +169,16 @@ class NoteFragment(swipeDirs: Int) : Fragment(R.layout.fragment_note) {
         }
         val itemTouchHelper=ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(rvNote)
+
     }
 
     private fun observeDataChanges() {
         noteActivityViewModel.getALLNotes().observe(viewLifecycleOwner){list->
-            noteBinding.noData.isVisible=list.isEmpty()
             rvAdapter.submitList(list)
         }
     }
 
+    @SuppressLint("SwitchIntDef")
     private fun recyclerViewDisplay() {
         when(resources.configuration.orientation){
             Configuration.ORIENTATION_PORTRAIT-> setUpRecyclerView(2)

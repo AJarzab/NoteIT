@@ -90,23 +90,6 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/noData"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:src="@drawable/ic_no_data"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-            </ImageView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <LinearLayout
             android:id="@+id/add_note_fab"
             android:layout_width="wrap_content"
