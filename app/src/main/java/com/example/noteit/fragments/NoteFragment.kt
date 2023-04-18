@@ -5,24 +5,27 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.Display
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.noteit.R
 import com.example.noteit.activity.MainActivity
 import com.example.noteit.adapters.RvNotesAdapter
 import com.example.noteit.databinding.FragmentNoteBinding
+import com.example.noteit.utils.SwipeToDelete
 import com.example.noteit.utils.hideKeyboard
 import com.example.noteit.viewModel.NoteActivityViewModel
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialElevationScale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +33,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
-class NoteFragment : Fragment(R.layout.fragment_note) {
+class NoteFragment(swipeDirs: Int) : Fragment(R.layout.fragment_note) {
 
     private lateinit var noteBinding: FragmentNoteBinding
     private val noteActivityViewModel:NoteActivityViewModel by activityViewModels()
@@ -67,6 +70,9 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
         }
 
         recyclerViewDisplay()
+        swipeToDelete(noteBinding.rvNote)
+
+
 //        Search
         noteBinding.search.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -116,6 +122,53 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
                 noteBinding.chatFabText.isVisible=true
             }
         }}
+    }
+
+    private fun swipeToDelete(rvNote: RecyclerView) {
+        val swipeToDeleteCallback=object : SwipeToDelete()
+        {
+            override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
+                val position=viewHolder.absoluteAdapterPosition
+                val note=rvAdapter.currentList[position]
+                var actionBtnTapped=false
+                noteActivityViewModel.deleteNote(note)
+                noteBinding.search.apply {
+                    hideKeyboard()
+                    clearFocus()
+                }
+                if(noteBinding.search.text.toString().isEmpty()){
+                    observeDataChanges()
+                }
+                val snackBar=Snackbar.make(
+                    requireView(),"Note Deleted",Snackbar.LENGTH_LONG
+                ).addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>(){
+                    override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                        super.onDismissed(transientBottomBar, event)
+                    }
+
+                    override fun onShown(transientBottomBar: Snackbar?) {
+                        transientBottomBar?.setAction("UNDO"){
+                            noteActivityViewModel.saveNote(note)
+                            actionBtnTapped=true
+                            noteBinding.noData.isVisible=false
+                        }
+                        super.onShown(transientBottomBar)
+                    }
+                }).apply {
+                    animationMode=Snackbar.ANIMATION_MODE_SLIDE
+                    setAnchorView(R.id.add_note_fab)
+                }
+                snackBar.setActionTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.yellowOrange
+                    )
+                )
+                snackBar.show()
+            }
+        }
+        val itemTouchHelper=ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(rvNote)
     }
 
     private fun observeDataChanges() {

@@ -145,7 +145,7 @@
             android:layout_alignParentBottom="true"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <com.yahiaangelo.markdownedittext.MarkdownStylesBar
                 android:id="@+id/styleBar"
