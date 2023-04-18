@@ -18,4 +18,5 @@
     <string name="bar">bar</string>
     <string name="this_is_a_title">Note Title</string>
     <string name="add_note_button">Add note button</string>
+    <string name="date_format">DD-MM-YY</string>
 </resources>

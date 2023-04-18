@@ -8,11 +8,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/noteItemLayourParent"
+            android:id="@+id/noteItemLayoutParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -42,7 +42,8 @@
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold"></com.google.android.material.textview.MaterialTextView>
+                    android:textStyle="bold">
+                </com.google.android.material.textview.MaterialTextView>
 
                 <TextView
                     android:id="@+id/noteContentItem"
@@ -58,7 +59,8 @@
                     android:maxLines="12"
                     android:padding="5dp"
                     android:text="@string/some_text"
-                    android:textSize="14sp"></TextView>
+                    android:textSize="14sp">
+                </TextView>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/noteDate"
@@ -75,10 +77,11 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/ubuntu_regular"
                     android:padding="5dp"
-                    android:text="DD-MM-YY"
+                    android:text="@string/date_format"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    android:textSize="12sp"></com.google.android.material.textview.MaterialTextView>
+                    android:textSize="12sp">
+                </com.google.android.material.textview.MaterialTextView>
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
     </RelativeLayout>
