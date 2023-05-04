@@ -18,6 +18,7 @@ class NoteActivityViewModel(private val repository: NoteRepository): ViewModel()
         repository.updateNote(existingNote)
     }
 
+
     fun deleteNote(existingNote : Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteNote(existingNote)
     }
@@ -26,6 +27,7 @@ class NoteActivityViewModel(private val repository: NoteRepository): ViewModel()
     {
         return repository.searchNote(query)
     }
+
 
     fun getALLNotes(): LiveData<List<Note>> = repository.getNote()
 

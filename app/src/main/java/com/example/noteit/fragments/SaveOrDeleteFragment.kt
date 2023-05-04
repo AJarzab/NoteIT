@@ -30,6 +30,10 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
+
+
+
+
 class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
    private lateinit var navController: NavController
    private lateinit var contentBinding: FragmentSaveOrDeleteBinding
@@ -166,8 +170,9 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
                             contentBinding.etTitle.text.toString(),
                             contentBinding.etNoteContent.getMD(),
                             currentDate,
-                            color,
                             currentDate,
+                            color,
+
                         )
                     )
 
@@ -197,8 +202,9 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
                     contentBinding.etTitle.text.toString(),
                     contentBinding.etNoteContent.getMD(),
                     currentDate,
+                    note!!.date1,
                     color,
-                    noteActivityViewModel.searchNote("SELECT date1 FROM NOTE WHERE id=0").toString(),
+
                 )
             )
         }

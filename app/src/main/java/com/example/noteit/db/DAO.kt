@@ -12,7 +12,7 @@ interface DAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addNote(note: Note)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.IGNORE)
     suspend fun updateNote(note: Note)
 
     @Query("SELECT * FROM Note ORDER BY id DESC")
@@ -20,9 +20,6 @@ interface DAO {
 
     @Query("SELECT * FROM Note WHERE title LIKE :query OR content LIKE :query OR date Like :query ORDER BY id DESC")
     fun searchNote(query: String): LiveData<List<Note>>
-
-
-
 
     @Delete
     suspend fun deleteNote(note: Note)
