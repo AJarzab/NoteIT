@@ -28,4 +28,5 @@ class NoteActivityViewModel(private val repository: NoteRepository): ViewModel()
     }
 
     fun getALLNotes(): LiveData<List<Note>> = repository.getNote()
+
 }

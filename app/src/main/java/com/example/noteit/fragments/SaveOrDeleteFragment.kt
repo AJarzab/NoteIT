@@ -166,7 +166,8 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
                             contentBinding.etTitle.text.toString(),
                             contentBinding.etNoteContent.getMD(),
                             currentDate,
-                            color
+                            color,
+                            currentDate,
                         )
                     )
 
@@ -196,7 +197,8 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
                     contentBinding.etTitle.text.toString(),
                     contentBinding.etNoteContent.getMD(),
                     currentDate,
-                    color
+                    color,
+                    noteActivityViewModel.searchNote("SELECT date1 FROM NOTE WHERE id=0").toString(),
                 )
             )
         }
