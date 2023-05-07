@@ -1,10 +1,15 @@
 package com.example.noteit.fragments
 
 import android.graphics.Color
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
@@ -13,6 +18,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.noteit.R
 import com.example.noteit.activity.MainActivity
 import com.example.noteit.databinding.BottomSheetLayoutBinding
@@ -30,6 +36,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
    private lateinit var navController: NavController
    private lateinit var contentBinding: FragmentSaveOrDeleteBinding
@@ -40,6 +47,7 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
     private val currentDate= SimpleDateFormat.getInstance().format(Date())
     private val job= CoroutineScope(Dispatchers.Main)
     private val args: SaveOrDeleteFragmentArgs by navArgs()
+    private var imageUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -53,6 +61,7 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         contentBinding= FragmentSaveOrDeleteBinding.bind(view)
@@ -83,6 +92,29 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
                 }
             } catch (e: Throwable){
                 Log.d("TAG", e.stackTraceToString())
+        }
+
+        val pickPhoto = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                val source = ImageDecoder.createSource(requireActivity().contentResolver, it)
+                val bitmap = ImageDecoder.decodeBitmap(source)
+
+                val imageView = contentBinding.noteImage
+                imageView.setImageBitmap(bitmap)
+
+                imageUrl = it.toString()
+//                contentBinding.deletePhotoButton.visibility = View.VISIBLE
+            }
+        }
+
+        contentBinding.fabAddPhoto.setOnClickListener{
+            pickPhoto.launch("image/*")
+        }
+
+        contentBinding.deletePhotoButton.setOnClickListener{
+            contentBinding.noteImage.setImageBitmap(null)
+            contentBinding.deletePhotoButton.visibility = View.GONE
+            imageUrl = null
         }
 
         contentBinding.fabColorPick.setOnClickListener{
@@ -149,7 +181,21 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
                 bottomBar.setBackgroundColor(color)
             }
             activity?.window?.statusBarColor=note.color
+
+            note.imageUrl?.let {
+                Glide.with(this)
+                    .load(it)
+                    .into(contentBinding.noteImage)
+            }
         }
+        note?.let {
+            if (it.imageUrl != null) {
+                contentBinding.deletePhotoButton.visibility = View.VISIBLE
+            } else {
+                contentBinding.deletePhotoButton.visibility = View.GONE
+            }
+        }
+
     }
 
     private fun saveNote() {
@@ -166,8 +212,9 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
                             contentBinding.etTitle.text.toString(),
                             contentBinding.etNoteContent.getMD(),
                             currentDate,
-                            color,
                             currentDate,
+                            color,
+                            imageUrl
                         )
                     )
 
@@ -197,8 +244,9 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
                     contentBinding.etTitle.text.toString(),
                     contentBinding.etNoteContent.getMD(),
                     currentDate,
+                    note!!.date1,
                     color,
-                    noteActivityViewModel.searchNote("SELECT date1 FROM NOTE WHERE id=0").toString(),
+                    imageUrl
                 )
             )
         }

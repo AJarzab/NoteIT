@@ -16,10 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
             android:padding="5dp"
+            android:background="?attr/selectableItemBackground"
             app:cardCornerRadius="13dp"
             app:cardElevation="5dp">
 
@@ -61,9 +61,17 @@
                     android:text="@string/some_text"
                     android:textSize="14sp">
                 </TextView>
+                <ImageView
+                    android:id="@+id/noteItemPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/noteContentItem"
+                    android:padding="5dp"
+                    >
+                </ImageView>
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/noteDate"
+                    android:id="@+id/noteFirstDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/noteContentItem"
@@ -81,28 +89,6 @@
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="12sp">
-                </com.google.android.material.textview.MaterialTextView>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/noteFirstDate"
-                    android:layout_width="148dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/noteContentItem"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginEnd="235dp"
-                    android:drawableStart="@drawable/ic_outline_calendar_today_24"
-                    android:drawablePadding="6dp"
-                    android:drawableTint="@color/black"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/ubuntu_regular"
-                    android:padding="5dp"
-                    android:text="@string/date_format"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="12sp">
-
                 </com.google.android.material.textview.MaterialTextView>
 
             </RelativeLayout>

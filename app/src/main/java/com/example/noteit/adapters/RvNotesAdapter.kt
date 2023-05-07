@@ -24,25 +24,23 @@ import org.commonmark.node.SoftLineBreak
 
 class RvNotesAdapter: ListAdapter<Note, RvNotesAdapter.NotesViewHolder>(DiffUtilCallback()) {
 
-    inner class NotesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val contentBinding=NoteItemLayoutBinding.bind(itemView)
+    inner class NotesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val contentBinding = NoteItemLayoutBinding.bind(itemView)
         val title: MaterialTextView = contentBinding.noteItemTitle
         val content: TextView = contentBinding.noteContentItem
-        val date: MaterialTextView = contentBinding.noteDate
         val date1: MaterialTextView = contentBinding.noteFirstDate
         val parent: MaterialCardView = contentBinding.noteItemLayoutParent
         val markwon = Markwon.builder(itemView.context)
             .usePlugin(StrikethroughPlugin.create())
             .usePlugin(TaskListPlugin.create(itemView.context))
-            .usePlugin(object : AbstractMarkwonPlugin(){
+            .usePlugin(object : AbstractMarkwonPlugin() {
                 override fun configureVisitor(builder: MarkwonVisitor.Builder) {
                     super.configureVisitor(builder)
-                    builder.on(
-                        SoftLineBreak::class.java
-                    ){visitor, _ -> visitor.forceNewLine()}
+                    builder.on(SoftLineBreak::class.java) { visitor, _ -> visitor.forceNewLine() }
                 }
             }).build()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         return NotesViewHolder(
@@ -56,9 +54,9 @@ class RvNotesAdapter: ListAdapter<Note, RvNotesAdapter.NotesViewHolder>(DiffUtil
                 parent.transitionName="recyclerView_${note.id}"
                 title.text=note.title
                 markwon.setMarkdown(content, note.content)
-                date.text=note.date
                 date1.text=note.date1
                 parent.setBackgroundColor(note.color)
+
 
                 itemView.setOnClickListener{
                     val action=NoteFragmentDirections.actionNoteFragmentToSaveOrDeleteFragment()

@@ -24,6 +24,7 @@
     <color name="card_green">#34C759</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="gray">#525252</color>
 
 
     <array name="color_picker">
