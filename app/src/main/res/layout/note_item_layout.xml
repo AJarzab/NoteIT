@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="match_parent"
         android:layout_margin="5dp">
 
         <com.google.android.material.card.MaterialCardView
@@ -25,16 +25,35 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="249dp"
+                android:layout_height="match_parent"
                 android:padding="5dp">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/noteItemTitle"
-                    android:layout_width="158dp"
+                    android:id="@+id/noteFirstDate"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
+                    android:layout_alignParentEnd="true"
                     android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+
+                    android:drawablePadding="6dp"
+                    android:drawableTint="@color/black"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:padding="5dp"
+                    android:text="@string/date_format"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"></com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/noteItemTitle"
+                    android:layout_width="103dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="25dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/ubuntu_medium"
                     android:padding="5dp"
@@ -50,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/noteItemTitle"
                     android:layout_marginStart="4dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="3dp"
                     android:ellipsize="end"
@@ -67,25 +86,6 @@
                     android:layout_below="@id/noteContentItem"
                     android:padding="5dp"></ImageView>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/noteFirstDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/noteContentItem"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="3dp"
-                    android:drawableStart="@drawable/create"
-                    android:drawablePadding="6dp"
-                    android:drawableTint="@color/black"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/ubuntu_regular"
-                    android:padding="5dp"
-                    android:text="@string/date_format"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"></com.google.android.material.textview.MaterialTextView>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/noteEditeDate"
@@ -94,10 +94,11 @@
                     android:layout_below="@id/noteContentItem"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="4dp"
-                    android:layout_marginTop="33dp"
-                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+
                     android:drawablePadding="6dp"
-                    android:drawableStart="@drawable/edit"
                     android:drawableTint="@color/black"
                     android:ellipsize="end"
                     android:fontFamily="@font/ubuntu_regular"
