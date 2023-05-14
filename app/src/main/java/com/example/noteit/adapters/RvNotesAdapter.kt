@@ -29,6 +29,7 @@ class RvNotesAdapter: ListAdapter<Note, RvNotesAdapter.NotesViewHolder>(DiffUtil
         val title: MaterialTextView = contentBinding.noteItemTitle
         val content: TextView = contentBinding.noteContentItem
         val date1: MaterialTextView = contentBinding.noteFirstDate
+        val date: MaterialTextView = contentBinding.noteEditeDate
         val parent: MaterialCardView = contentBinding.noteItemLayoutParent
         val markwon = Markwon.builder(itemView.context)
             .usePlugin(StrikethroughPlugin.create())
@@ -55,6 +56,7 @@ class RvNotesAdapter: ListAdapter<Note, RvNotesAdapter.NotesViewHolder>(DiffUtil
                 title.text=note.title
                 markwon.setMarkdown(content, note.content)
                 date1.text=note.date1
+                date.text=note.date
                 parent.setBackgroundColor(note.color)
 
 
