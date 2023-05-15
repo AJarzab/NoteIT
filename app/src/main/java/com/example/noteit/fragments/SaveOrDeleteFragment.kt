@@ -194,7 +194,6 @@ class SaveOrDeleteFragment : Fragment(R.layout.fragment_save_or_delete) {
             } else {
                 contentBinding.deletePhotoButton.visibility = View.GONE
             }
-            imageUrl = it.imageUrl
         }
 
     }

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="contentBinding"
+            type="com.example.noteit.databinding.FragmentSaveOrDeleteBindingImpl" />
     </data>
 
     <RelativeLayout
@@ -51,8 +53,9 @@
                 android:text="@string/edit_note"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold">
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:maxLines="1">
             </com.google.android.material.textview.MaterialTextView>
 
             <ImageView
@@ -116,18 +119,19 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <com.yahiaangelo.markdownedittext.MarkdownEditText
+                                android:id="@+id/etNoteContent"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="22dp"
-                                android:layout_marginEnd="22dp"
                                 android:layout_marginTop="10dp"
+                                android:layout_marginEnd="22dp"
                                 android:background="@null"
                                 android:fontFamily="@font/ubuntu_regular"
                                 android:hint="@string/note"
                                 android:importantForAutofill="no"
                                 android:padding="10dp"
                                 android:textSize="16sp"
-                                android:id="@+id/etNoteContent">
+                                >
                             </com.yahiaangelo.markdownedittext.MarkdownEditText>
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -163,9 +167,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/fabAddPhoto"
-                android:layout_margin="15dp"
+                android:layout_marginStart="100dp"
                 android:backgroundTint="@color/darkPurple"
-                android:layout_gravity="bottom|start"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="75dp"
                 android:src="@drawable/ic_round_add_24"
                 android:contentDescription="@string/add_photo_button">
             </com.google.android.material.floatingactionbutton.FloatingActionButton>

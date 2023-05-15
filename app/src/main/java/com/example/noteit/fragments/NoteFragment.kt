@@ -56,7 +56,6 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
         requireView().hideKeyboard()
         CoroutineScope(Dispatchers.Main).launch {
             delay(10)
-//            activity.window.statusBarColor = Color.WHITE
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             activity.window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
             activity.window.statusBarColor = Color.parseColor("#9E9D9D")

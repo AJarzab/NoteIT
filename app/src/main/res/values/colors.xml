@@ -25,6 +25,9 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#525252</color>
+    <color name="normal_outline_color">#000000</color>
+    <color name="checked_fill_color">#00000000</color>
+    <color name="check_mark_color">#000000</color>
 
 
     <array name="color_picker">

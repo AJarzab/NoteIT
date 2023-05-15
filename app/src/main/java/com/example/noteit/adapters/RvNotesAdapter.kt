@@ -31,9 +31,14 @@ class RvNotesAdapter: ListAdapter<Note, RvNotesAdapter.NotesViewHolder>(DiffUtil
         val date1: MaterialTextView = contentBinding.noteFirstDate
         val date: MaterialTextView = contentBinding.noteEditeDate
         val parent: MaterialCardView = contentBinding.noteItemLayoutParent
+
+        val checkedFillColor = itemView.context.getColor(R.color.checked_fill_color)
+        val normalOutlineColor = itemView.context.getColor(R.color.normal_outline_color)
+        val checkMarkColor = itemView.context.getColor(R.color.check_mark_color)
+
         val markwon = Markwon.builder(itemView.context)
             .usePlugin(StrikethroughPlugin.create())
-            .usePlugin(TaskListPlugin.create(itemView.context))
+            .usePlugin(TaskListPlugin.create(checkedFillColor, normalOutlineColor, checkMarkColor))
             .usePlugin(object : AbstractMarkwonPlugin() {
                 override fun configureVisitor(builder: MarkwonVisitor.Builder) {
                     super.configureVisitor(builder)
