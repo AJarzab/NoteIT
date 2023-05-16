@@ -1,5 +1,7 @@
-# NoteIT
 ![ic_launcher](https://github.com/AJarzab/NoteIT/assets/92082190/045caf26-e4c7-4613-8b82-6db093e618f1)
+# NoteIT
+
+
 App to make Notes, lists etc.
 
 ![Screenshot_20230516_114015](https://github.com/AJarzab/NoteIT/assets/92082190/b95798b8-af8b-48cf-9682-0d093b090dc6)
